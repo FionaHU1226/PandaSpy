@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from streamlit_ace import st_ace  # 更好看的代码编辑器组件
-import utils.validator as validator
+import utils.validators.validator_1 as validator_1
 import utils.data_loader as data_loader
 
 def run_task():
@@ -42,7 +42,7 @@ def run_task():
     user_code_1 = st_ace(value=st.session_state.step1_code, language='python', key="step1_code")
     
     if st.button("🚀 运行代码", key="step1_run"):
-        result, message = validator.validate_task_1_step1(user_code_1, df)
+        result, message = validator_1.validate_task_1_step1(user_code_1, df)
         if result:
             st.success("✅ 正确！数据加载成功！")
             st.session_state.step1_completed = True
@@ -64,7 +64,7 @@ def run_task():
         user_code_2 = st_ace(value=st.session_state.step2_code, language='python', key="step2_code")
         
         if st.button("🚀 运行代码", key="step2_run"):
-            result, message = validator.validate_task_1_step2(user_code_2, df)
+            result, message = validator_1.validate_task_1_step2(user_code_2, df)
             if result:
                 st.success("✅ 正确！你已经了解数据结构！")
                 st.session_state.step2_completed = True
@@ -93,7 +93,7 @@ def run_task():
         user_code_3 = st_ace(value=st.session_state.step3_code, language='python', key="step3_code")
         
         if st.button("🚀 运行代码", key="step3_run"):
-            result, message = validator.validate_task_1_step3(user_code_3, df)
+            result, message = validator_1.validate_task_1_step3(user_code_3, df)
             if result:
                 st.success("✅ 你找到了大额交易！")
                 st.session_state.suspicious_transactions = message
@@ -120,7 +120,7 @@ def run_task():
         
         if st.button("🚀 运行代码", key="step4_run"):
             if st.session_state.suspicious_transactions is not None:
-                result, message = validator.validate_task_1_step4(user_code_4, st.session_state.suspicious_transactions)
+                result, message = validator_1.validate_task_1_step4(user_code_4, st.session_state.suspicious_transactions)
                 if result:
                     st.success("🏆 恭喜！你锁定了嫌疑账户！")
                     st.dataframe(message)
@@ -145,7 +145,7 @@ def run_task():
         user_code_5 = st_ace(value=st.session_state.step5_code, language='python', key="step5_code")
         
         if st.button("🚀 运行代码", key="step5_run"):
-            result, message = validator.validate_task_1_step5(user_code_5, st.session_state.suspicious_transactions)
+            result, message = validator_1.validate_task_1_step5(user_code_5, st.session_state.suspicious_transactions)
             if result:
                 st.success("✅ 计算完成！")
                 # 以表格方式展示每个账户的总金额
@@ -171,7 +171,7 @@ def run_task():
         
         if st.button("🚀 运行代码", key="step6_run"):
             if st.session_state.suspicious_totals is not None:
-                result, message = validator.validate_task_1_step6(user_code_6, st.session_state.suspicious_totals)
+                result, message = validator_1.validate_task_1_step6(user_code_6, st.session_state.suspicious_totals)
                 if result:
                     st.success("🏆 找到最终嫌疑账户！")
                     st.write("罪犯账户为：", message)
